@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  drupal:
+    image: bitnami/drupal:latest
+    ports:
+      - 8080:80
+    volumes:
+      - drupal_data:/bitnami/drupal
