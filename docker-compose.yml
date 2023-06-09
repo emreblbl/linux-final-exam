@@ -7,3 +7,13 @@ services:
       - 8080:80
     volumes:
       - drupal_data:/bitnami/drupal
+    depends_on:
+        - mariadb
+  db:
+    image: bitnami/mariadb:latest
+    volumes:
+      - mariadb_data:/bitnami/mariadb
+    environment:
+      - USER = YAM428
+      - PASSWORD = 030720110
+      - DATABASE = final
