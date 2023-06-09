@@ -21,7 +21,24 @@ services:
     image: nginx:latest
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - drupal
+  certbot:
+    image: certbot
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - nginx
+    command: certonly --webroot --webroot-path=/var/www/html --email
+    environment:
+      - DOMAIN=emre-bulbul.me,www.emre-bulbul.me
+      - EMAIL=emreblblvv@gmail.com
+      - CERTBOT_ARGS=--webroot --webroot-path=/usr/share/nginx/html --no-eff-email --agree-tos --manual-public-ip-logging-ok --preferred-challenges=http
+volumes:
+    drupal_data:
+        driver: local
+    mariadb_data:
+        driver: local
