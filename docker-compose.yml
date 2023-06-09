@@ -17,3 +17,11 @@ services:
       - USER = YAM428
       - PASSWORD = 030720110
       - DATABASE = final
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - drupal
